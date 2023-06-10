@@ -75,7 +75,7 @@ def saved(reddit):
             saved.append(i)
         yaml.dump(saved, file)
 
-def saved(reddit):
+def redditor(reddit):
     with open("redditor.yaml", "w") as file:
         cs = []
         redditor = reddit.user.me()
