@@ -48,3 +48,30 @@ with open("saved.yaml", "w") as file:
         saved.append(i)
     yaml.dump(saved, file)
 
+with open("redditor-comments-submissions.yaml", "w") as file:
+    cs = []
+    redditor = reddit.user.me()
+    for comment in redditor.comments.new():
+        c= {}
+        c["type"] = "comment"
+        c["id"] = comment.id
+        c["created_utc"] = comment.created_utc
+        c["permalink"] = comment.permalink
+        c["score"] = comment.score
+        cs.append(c)
+    for submission in redditor.submissions.new():
+        s= {}
+        s["type"] = "submission"
+        s["id"] = submission.id
+        s["created_utc"] = submission.created_utc
+        s["permalink"] = submission.permalink
+        s["score"] = submission.score
+
+        s["url"] = submission.url
+        s["title"] = submission.title
+        s["upvote_ratio"] = submission.upvote_ratio
+
+        cs.append(s)
+
+    yaml.dump(cs, file)
+
