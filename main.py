@@ -40,6 +40,7 @@ with open("saved.yaml", "w") as file:
             i["url"] = item.url
             i["title"] = item.title
             i["upvote_ratio"] = item.upvote_ratio
+            i["is_self"] = item.is_self
 
         i["id"] = item.id
         i["created_utc"] = item.created_utc
