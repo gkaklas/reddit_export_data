@@ -55,7 +55,7 @@ with open("saved.yaml", "w") as file:
         saved.append(i)
     yaml.dump(saved, file)
 
-with open("redditor-comments-submissions.yaml", "w") as file:
+with open("redditor.yaml", "w") as file:
     cs = []
     redditor = reddit.user.me()
     for comment in redditor.comments.new():
