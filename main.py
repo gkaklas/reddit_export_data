@@ -4,6 +4,7 @@ import praw
 from dotenv import load_dotenv
 import os
 import yaml
+import argparse
 
 load_dotenv()
 
@@ -14,6 +15,22 @@ reddit = praw.Reddit(
     client_secret = os.environ["PRAW_CLIENT_SECRET"],
     user_agent = os.environ["PRAW_USER_AGENT"],
 )
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--subreddits', action="store_true", help="Save subcribed subreddits in subreddits.txt")
+parser.add_argument('--multireddits', action="store_true", help="Save user's multireddits in multireddits.yaml")
+parser.add_argument('--saved', action="store_true", help="Save saved comments and submissions in saved.yaml")
+parser.add_argument('--redditor', action="store_true", help="Save redditor's submissions and comments in redditor.yaml")
+
+args = parser.parse_args()
+if args.subreddits:
+    subreddits(reddit)
+if args.multireddits:
+    multireddits(reddit)
+if args.saved:
+    saved(reddit)
+if args.redditor:
+    redditor(reddit)
 
 def subreddits(reddit):
     with open("subreddits.txt", "w") as file:
