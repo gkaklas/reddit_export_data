@@ -3,6 +3,7 @@
 import praw
 from dotenv import load_dotenv
 import os
+import yaml
 
 load_dotenv()
 
@@ -17,4 +18,13 @@ reddit = praw.Reddit(
 with open("subreddits.txt", "w") as file:
     for subreddit in reddit.user.subreddits(limit=None):
         file.write(str(subreddit) + "\n")
+
+with open("multireddits.yaml", "w") as file:
+    multireddits = {}
+    for multireddit in reddit.user.multireddits():
+        subreddits = []
+        for subreddit in multireddit.subreddits:
+            subreddits.append(str(subreddit))
+        multireddits[multireddit.name] = subreddits
+    yaml.dump(multireddits, file)
 
