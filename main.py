@@ -14,3 +14,7 @@ reddit = praw.Reddit(
     user_agent = os.environ["PRAW_USER_AGENT"],
 )
 
+with open("subreddits.txt", "w") as file:
+    for subreddit in reddit.user.subreddits(limit=None):
+        file.write(str(subreddit) + "\n")
+
