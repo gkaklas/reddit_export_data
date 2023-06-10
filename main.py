@@ -43,7 +43,7 @@ def saved(reddit):
                     i["external_link"] = True
 
             i["id"] = item.id
-            i["created_utc"] = item.created_utc
+            i["created_utc"] = int(item.created_utc)
             i["permalink"] = item.permalink
             i["score"] = item.score
             saved.append(i)
@@ -57,7 +57,7 @@ def redditor(reddit):
             c= {}
             c["type"] = "comment"
             c["id"] = comment.id
-            c["created_utc"] = comment.created_utc
+            c["created_utc"] = int(comment.created_utc)
             c["permalink"] = comment.permalink
             c["score"] = comment.score
             cs.append(c)
@@ -65,7 +65,7 @@ def redditor(reddit):
             s= {}
             s["type"] = "submission"
             s["id"] = submission.id
-            s["created_utc"] = submission.created_utc
+            s["created_utc"] = int(submission.created_utc)
             s["permalink"] = submission.permalink
             s["score"] = submission.score
 
