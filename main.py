@@ -28,3 +28,23 @@ with open("multireddits.yaml", "w") as file:
         multireddits[multireddit.name] = subreddits
     yaml.dump(multireddits, file)
 
+with open("saved.yaml", "w") as file:
+    saved = []
+    redditor = reddit.user.me()
+    for item in redditor.saved(limit=None):
+        i= {}
+        i["type"] = "comment"
+        if isinstance(item, praw.models.Submission):
+            i["type"] = "submission"
+
+            i["url"] = item.url
+            i["title"] = item.title
+            i["upvote_ratio"] = item.upvote_ratio
+
+        i["id"] = item.id
+        i["created_utc"] = item.created_utc
+        i["permalink"] = item.permalink
+        i["score"] = item.score
+        saved.append(i)
+    yaml.dump(saved, file)
+
