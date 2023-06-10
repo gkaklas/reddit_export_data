@@ -41,6 +41,12 @@ with open("saved.yaml", "w") as file:
             i["title"] = item.title
             i["upvote_ratio"] = item.upvote_ratio
             i["is_self"] = item.is_self
+            i["external_link"] = False
+
+            domains = ["redd.it","i.imgur.com","reddit.com"]
+            is_media = any(domain in item.url for domain in domains)
+            if not is_media and not item.is_self:
+                i["external_link"] = True
 
         i["id"] = item.id
         i["created_utc"] = item.created_utc
